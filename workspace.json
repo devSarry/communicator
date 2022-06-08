@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "dictate-app": "apps/dictate-app",
+    "dictate-app-e2e": "apps/dictate-app-e2e"
+  }
+}
