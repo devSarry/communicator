@@ -1,11 +1,11 @@
 import {Flex, IconButton} from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faMicrophone, faMicrophoneSlash} from '@fortawesome/free-solid-svg-icons'
-import RecordRTC, {StereoAudioRecorder} from "@mrmaruf/recordrtc";
 import {useEffect, useState} from "react";
 import Siriwave from "react-siriwave";
 import OutputText from "../output-text/output-text";
 import {VoskSTTResult} from "../../types/VoskServerTypes";
+import {RecordRTCPromisesHandler, StereoAudioRecorder} from "recordrtc";
 
 /* eslint-disable-next-line */
 export interface RecorderProps {}
@@ -13,7 +13,7 @@ export interface RecorderProps {}
 export function Recorder(props: RecorderProps) {
   const ws = new WebSocket('ws://localhost:2700');
 
-  const [recorder, setRecorder] = useState<RecordRTC>();
+  const [recorder, setRecorder] = useState<RecordRTCPromisesHandler>();
   const [stream, setSteam] = useState<MediaStream | null>();
 
   const [texResults, setTextResults] = useState<VoskSTTResult[]>([]);
@@ -46,7 +46,7 @@ export function Recorder(props: RecorderProps) {
     const s = await navigator.mediaDevices.getUserMedia({audio: true});
     setSteam(s);
 
-    const r = new RecordRTC(s, {
+    const r = await new RecordRTCPromisesHandler(s, {
       type: 'audio',
       recorderType: StereoAudioRecorder,
       desiredSampRate: 8000,
