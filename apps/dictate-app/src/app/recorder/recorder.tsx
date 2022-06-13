@@ -11,7 +11,8 @@ import {RecordRTCPromisesHandler, StereoAudioRecorder} from "recordrtc";
 export interface RecorderProps {}
 
 export function Recorder(props: RecorderProps) {
-  const ws = new WebSocket('ws://localhost:2700');
+  // @ts-ignore
+  const ws = new WebSocket(process.env.NX_VOSK_SERVER || 'ws://localhost:2700');
 
   const [recorder, setRecorder] = useState<RecordRTCPromisesHandler>();
   const [stream, setSteam] = useState<MediaStream | null>();
