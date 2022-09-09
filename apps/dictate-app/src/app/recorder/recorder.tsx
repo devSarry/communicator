@@ -12,7 +12,7 @@ export interface RecorderProps {}
 
 export function Recorder(props: RecorderProps) {
   // @ts-ignore
-  const ws = new WebSocket(process.env.NX_VOSK_SERVER || 'ws://localhost:2700');
+  const ws = new WebSocket(process.env.NX_VOSK_SERVER || 'wss://vosk-websocket-server-kyx3jxohsa-lz.a.run.app');
 
   const [recorder, setRecorder] = useState<RecordRTCPromisesHandler>();
   const [stream, setSteam] = useState<MediaStream | null>();
